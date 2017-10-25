@@ -4,7 +4,8 @@ get
         ar($responsefault,$fault)
         VM($VMfault,$fault)
         PM($PMfault,$fault)
-        $finalfault=($responsefault,$VMfault,$PMfault)  
+        $finalfault=($responsefault,$VMfault,$PMfault)
+        #python print($finalfault)  
         Remedy.remedy_of($finalfault,$remedy)
 
 
@@ -13,74 +14,20 @@ arr
     when       
         python ft=tuple($fault)
         $resp=ft[0]
+        #python print($resp)
         Remedy.responsekind($resp,$responsefault)
 
 VM
     use VM($VMfault,$fault)
     when
-        ft=tuple($fault)[1]
-        $s1=ft[0]
-        $m1=ft[1]
-        $p1=ft[2]
-        $c1=ft[3]
-        VMstorage($s1,$f1)
-        VMmemory($m1,$f2)
-        VMnetwork($p1,$f3)
-        VMcpu($c1,$f4)
-        $Vf=($f1,$f2,$f3,$f4)
-        Remedy.VMfault($Vf,$VMfault)
+        $ft=tuple($fault)[1]
+        #python print($ft)
+        Remedy.VMfault($ft,$VMfault)
 
 PM
     use PM($PMfault,$fault)
     when
-        ft=tuple($fault)[2]
-        $s2=ft[0]
-        $m2=ft[1]
-        $p2=ft[2]
-        $c2=ft[3]
-        PMstorage($s2,$f5)
-        PMmemory($m2,$f6)
-        PMnetwork($p2,$f7)
-        PMcpu($c2,$f8)
-        $Pf=($f5,$f6,$f7,$f8)
-        Remedy.PMfault($Pf,$PMfault)
+        $pt=tuple($fault)[2]
+        #python print ($pt)
+        Remedy.PMfault($pt,$PMfault)
 
-VMstorage
-    use VMstorage($s1,$f1)
-    when
-        Remedy.VMstorage($s1,$f1)
-
-VMmemory
-    use VMmemory($m1,$f2)
-    when
-        Remedy.VMmemory($m1,$f2)
-
-VMnetwork
-    use VMnetwork($p1,$f3)
-    when
-        Remedy.VMnetwork($p1,$f3)
-
-VMcpu
-    use VMcpu($c1,$f4)
-    when
-        Remedy.VMcpu($c1,$f4)
-
-PMstorage
-    use PMstorage($s2,$f5)
-    when
-        Remedy.PMstorage($s2,$f5)
-
-PMmemory
-    use PMmemory($m2,$f6)
-    when
-        Remedy.PMmemory($m2,$f6)
-
-PMnetwork
-    use PMnetwork($p2,$f7)
-    when
-        Remedy.PMnetwork($p2,$f7)
-
-PMcpu
-    use PMcpu($c2,$f8)
-    when
-        Remedy.PMcpu($c2,$f8)  

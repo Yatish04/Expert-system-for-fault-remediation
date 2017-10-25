@@ -1,53 +1,23 @@
-remedy_of((less, v1, p1), r1)
-remedy_of((less,v2,p2),r2)
-remedy_of((less,v3,p3),r3)
-remedy_of((more,v1,p1),r4)
-remedy_of((more,v2,p2),r5)
-remedy_of((more,v3,p3),r6)
+remedy_of(('f1', 'v1', 'p1'),r1)
+remedy_of(('f1', 'v2', 'p2'),r2)
+remedy_of(('f1', 'v3', 'p3'),r3)
+remedy_of(('f2', 'v1', 'p1'),r4)
+remedy_of(('f2', 'v2', 'p2'),r5)
+remedy_of(('f2', 'v3', 'p3'),r6)
 
 #2*81*81 combinations
 
 responsekind(less,f1)
 responsekind(more,f2)
 
-VMstorage(30,low)
-VMstorage(50,mid)
-VMstorage(70,high)
 
-VMmemory(30,low)
-VMmemory(50,mid)
-VMmemory(70,high)
-
-VMnetwork(30,low)
-VMnetwork(50,mid)
-VMnetwork(70,high)
-
-VMcpu(30,low)
-VMcpu(50,mid)
-VMcpu(70,high)
-
-VMfault((low, low, low, low),v1)
-VMfault((low,low,low,mid),v2)
-VMfault((low,low,low,high),v3)
+VMfault(('low', 'low', 'low', 'low'),v1)
+VMfault(('low', 'low', 'low', 'mid'),v2)
+VMfault(('low', 'low', 'low', 'high'),v3)
 #81 combinations
 
-PMstorage(30,low)
-PMstorage(50,mid)
-PMstorage(70,high)
 
-PMmemory(30,low)
-PMmemory(50,mid)
-PMmemory(70,high)
-
-PMnetwork(30,low)
-PMnetwork(50,mid)
-PMnetwork(70,high)
-
-PMcpu(30,low)
-PMcpu(50,mid)
-PMcpu(70,high)
-
-PMfault((low, low, low, low),p1)
-PMfault((low,low,low,mid),p2)
-PMfault((low,low,low,high),p3)
+PMfault(('low', 'low', 'low', 'low'),p1)
+PMfault(('low', 'low', 'low', 'mid'),p2)
+PMfault(('low', 'low', 'low', 'high'),p3)
 #81 combinations

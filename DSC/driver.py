@@ -4,6 +4,7 @@ Created on Tue Oct 17 19:42:25 2017
 
 @author: Tanmay
 """
+#Check if git 
 import sys
 from pyke import knowledge_engine, krb_traceback
 
@@ -40,11 +41,11 @@ def min_heap(ob,criteria):
         
 def scale(value):
     if value<50:
-        return 30
+        return 'low'
     elif 50<value<=70:
-        return 50
+        return 'mid'
     else:
-        return 70
+        return 'high'
 
 def getremedy():
     engine.reset()
@@ -71,10 +72,6 @@ def getremedy():
         network2=scale(network2)
         cpu2=scale(cpu2)
         fault=(a_time,(storage1,memory1,network1,cpu1),(storage2,memory2,network2,cpu2))
-        #cost=int(input("Enter cost:"))
-        #time=int (input("Enter time:"))
-        #fault=(cost,time)
-        #fault='f1'
         print(fault)
         with engine.prove_goal('Remedyrule.get($fault,$remedy)',fault=fault) as gen:
             for  i,(vars, no_plan) in enumerate(gen):
