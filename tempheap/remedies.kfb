@@ -1,0 +1,12 @@
+remedy_of(f1,(r1,20,40))
+remedy_of(f1,(r2,30,30))
+
+remedy_of(f2,(r4,40,20))
+remedy_of(f2,(r2,50,10))
+remedy_of(f2,(r3,60,40))
+remedy_of(f2,(r5,20,1))
+
+remedy_of(f3,(r1,70,30))
+
+remedy_of(f4,(r3,80,20))
+remedy_of(f4,(r4,90,10))

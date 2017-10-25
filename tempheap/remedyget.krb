@@ -1,0 +1,4 @@
+get
+	use get($fault,$remedy)
+	when
+		remedies.remedy_of($fault,$remedy)
