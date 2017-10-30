@@ -29,6 +29,15 @@ def compare(ob1,ob2,criteria):
     else:
         return ob1.prod>ob2.prod
 
+class hashtable(object):
+    """docstring for ."""
+    def __init__(self):
+        self.list1 = [0,0,0,0,0,0,0,0,0,0]
+hashobbjects=[]
+for i in range(100):
+    new=hashtable()
+    hashobbjects.append(new)
+
 def min_heap(ob,criteria):
     global remedy_list
     remedy_list.append(ob)
@@ -46,6 +55,24 @@ def scale(value):
         return 'mid'
     else:
         return 'high'
+        
+def search(key,curr):#curr is a tuple(fault,remedy)
+    primary_key=key%100
+    sec_key=key//100
+    if(hashobbjects[primary_key-1].list1[sec_key-1]==0):
+        raise KeyError('key not found') 
+    else:
+        temp=hashobbjects[primary_key-1].list1[sec_key-1]
+        for value in temp:
+            if(curr==value[1]):
+                return value[1]
+def insert(key,curr):
+    primary_key=key%100
+    sec_key=key//100
+    if(hashobbjects[primary_key-1].list1[sec_key-1]==0):
+        hashobbjects[primary_key-1].list1[sec_key-1]=[curr]
+    else:
+        hashobbjects[primary_key-1].list1[sec_key-1].append(curr)
 
 def getremedy():
     engine.reset()
@@ -73,29 +100,36 @@ def getremedy():
         cpu2=scale(cpu2)
         fault=(a_time,(storage1,memory1,network1,cpu1),(storage2,memory2,network2,cpu2))
         print(fault)
-        with engine.prove_goal('Remedyrule.get($fault,$remedy)',fault=fault) as gen:
-            for  i,(vars, no_plan) in enumerate(gen):
-                #remedy=tuple(vars['remedy'])
-                #ob=REMEDY(remedy[0],remedy[1],remedy[2])
-                #if (c_check=="y" and t_check=="y"):
-                    #min_heap(ob,"prod")
-                #elif (c_check=="y"):
-                    #min_heap(ob,"cost")
-                #elif (t_check=="y"):
-                    #min_heap(ob,"time")
-                #else: #No priority to solution...displaying all
-                #print("Remedy:",ob.cost,ob.name,ob.time)
-                print ("Remedy:",vars['remedy'])
-            if i==-1:
-                print("No remedy available")
-            #elif (c_check=="y" or t_check=="y"):
-                #print ("\nRemedy:",remedy_list[0].name,"Cost:",remedy_list[0].cost,"Time:",remedy_list[0].time,"is the best solution")
-                #print("All solutions: ")
-                #for i in remedy_list:
-                    #print(i.name,i.cost,i.time)
-                
-                #print("The remedy to the fault: ",fault,"; is ", vars['remedy'])
-                #print (vars)
+        sum1=int(a_time)+int(storage1)+int(cpu1)+int(network1)+int(memory1)+int(storage2)+int(cpu2)+int(network2)+int(memory2)
+        try:
+            op=search(sum1,fault)
+            print(op)
+        except:
+            with engine.prove_goal('Remedyrule.get($fault,$remedy)',fault=fault) as gen:
+                for  i,(vars, no_plan) in enumerate(gen):
+                    #remedy=tuple(vars['remedy'])
+                    #ob=REMEDY(remedy[0],remedy[1],remedy[2])
+                    #if (c_check=="y" and t_check=="y"):
+                        #min_heap(ob,"prod")
+                    #elif (c_check=="y"):
+                        #min_heap(ob,"cost")
+                    #elif (t_check=="y"):
+                        #min_heap(ob,"time")
+                    #else: #No priority to solution...displaying all
+                    #print("Remedy:",ob.cost,ob.name,ob.time)
+                    print ("Remedy:",vars['remedy'])
+                    insert(sum1,(fault,'Insert the best possible remedy here '))
+                if i==-1:
+                    print("No remedy available")
+                    insert(sum1,(fault,'No Remedy Availaible'))
+                #elif (c_check=="y" or t_check=="y"):
+                    #print ("\nRemedy:",remedy_list[0].name,"Cost:",remedy_list[0].cost,"Time:",remedy_list[0].time,"is the best solution")
+                    #print("All solutions: ")
+                    #for i in remedy_list:
+                        #print(i.name,i.cost,i.time)
+                    
+                    #print("The remedy to the fault: ",fault,"; is ", vars['remedy'])
+                    #print (vars)
     except:
         krb_traceback.print_exc()
         
