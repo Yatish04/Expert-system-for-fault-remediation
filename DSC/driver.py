@@ -63,8 +63,9 @@ def search(key,curr):#curr is a tuple(fault,remedy)
         raise KeyError('key not found') 
     else:
         temp=hashobbjects[primary_key-1].list1[sec_key-1]
+#        print(temp)
         for value in temp:
-            if(curr==value[1]):
+            if(curr==value[0]):
                 return value[1]
 def insert(key,curr):
     primary_key=key%100
@@ -85,22 +86,22 @@ def getremedy():
         memory1=int(input("Enter Memory percentage:[0-100]"))
         network1=int(input("Enter Network level:[0-100]"))
         cpu1=int(input("Enter CPU level:[0-100]"))
-        storage1=scale(storage1)
-        memory1=scale(memory1)
-        network1=scale(network1)
-        cpu1=scale(cpu1)
+        storage11=scale(storage1)
+        memory11=scale(memory1)
+        network11=scale(network1)
+        cpu11=scale(cpu1)
         print("\nPhysical Machine Parameters")
         storage2=int(input("Enter Storage percentage:[0-100]"))
         memory2=int(input("Enter Memory percentage:[0-100]"))
         network2=int(input("Enter Network level:[0-100]"))
         cpu2=int(input("Enter CPU level:[0-100]"))
-        storage2=scale(storage2)
-        memory2=scale(memory2)
-        network2=scale(network2)
-        cpu2=scale(cpu2)
-        fault=(a_time,(storage1,memory1,network1,cpu1),(storage2,memory2,network2,cpu2))
-        print(fault)
-        sum1=int(a_time)+int(storage1)+int(cpu1)+int(network1)+int(memory1)+int(storage2)+int(cpu2)+int(network2)+int(memory2)
+        storage22=scale(storage2)
+        memory22=scale(memory2)
+        network22=scale(network2)
+        cpu22=scale(cpu2)
+        fault=(a_time,(storage11,memory11,network11,cpu11),(storage22,memory22,network22,cpu22))
+#        print(fault,'hello')
+        sum1=int(storage1)+int(cpu1)+int(network1)+int(memory1)+int(storage2)+int(cpu2)+int(network2)+int(memory2)
         try:
             op=search(sum1,fault)
             print(op)
@@ -118,7 +119,7 @@ def getremedy():
                     #else: #No priority to solution...displaying all
                     #print("Remedy:",ob.cost,ob.name,ob.time)
                     print ("Remedy:",vars['remedy'])
-                    insert(sum1,(fault,'Insert the best possible remedy here '))
+                    insert(sum1,(fault,('Insert the fault here','Insert best possible remedy here')))
                 if i==-1:
                     print("No remedy available")
                     insert(sum1,(fault,'No Remedy Availaible'))
