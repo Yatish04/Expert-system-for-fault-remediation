@@ -1,0 +1,32 @@
+get
+    use get($fault,$actualfault,$remedy)
+    when
+        ar($responsefault,$fault)
+        VM($VMfault,$fault)
+        PM($PMfault,$fault)
+        $finalfault=($responsefault,$VMfault,$PMfault)
+        #python print($finalfault)
+        Remedy.remedy_of($finalfault,$actualfault,$remedy)
+
+
+arr
+    use ar($responsefault,$fault)
+    when
+        python ft=tuple($fault)
+        $resp=ft[0]
+        #python print($resp)
+        Remedy.responsekind($resp,$responsefault)
+
+VM
+    use VM($VMfault,$fault)
+    when
+        $ft=tuple($fault)[1]
+        #python print($ft)
+        Remedy.VMfault($ft,$VMfault)
+
+PM
+    use PM($PMfault,$fault)
+    when
+        $pt=tuple($fault)[2]
+        #python print ($pt)
+        Remedy.PMfault($pt,$PMfault)
